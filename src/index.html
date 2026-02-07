@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROUTINE TEST SET UP</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-window">
+            <div class="login-header">
+                <div class="window-title">ROUTINE TEST SET UP</div>
+                <div class="close-button">X</div>
+            </div>
+            <div class="login-content">
+                <div class="login-row">
+                    <label class="login-label">User</label>
+                    <input type="text" id="username" class="login-input">
+                </div>
+                <div class="login-row">
+                    <label class="login-label">Password</label>
+                    <input type="password" id="password" class="login-input">
+                </div>
+                <div class="login-actions">
+                    <button id="loginBtn" class="login-button">Login</button>
+                </div>
+            </div>
+            <!-- <div class="credentials-info">
+                <div class="credential-item">
+                    <strong>Admin:</strong> admin / admin
+                </div>
+                <div class="credential-item">
+                    <strong>Operator:</strong> user / pass
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboardScreen" class="screen">
+        <header class="app-header">
+            <!-- <div class="header-left">
+                <h1>IR & VFD No Load Test Station</h1>
+                <span id="userRole" class="user-badge"></span>
+            </div> -->
+            <div class="header-right">
+                <span id="currentTime"></span>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" data-tab="testing">Testing</button>
+            <button class="nav-btn" data-tab="import">Import Data</button>
+            <button class="nav-btn" data-tab="reports">Reports</button>
+            <button class="nav-btn supervisor-only" data-tab="settings">Settings</button>
+            <button class="nav-btn supervisor-only" data-tab="history">History</button>
+        </nav>
+
+        <!-- Import Data Tab -->
+        <div id="importTab" class="tab-content">
+            <div class="import-container">
+                <!-- Import Header -->
+                <div class="import-header">
+                    <h2>Master Data Import for Testing</h2>
+                    <p>Upload Excel file with motor test parameters to run automated tests</p>
+                </div>
+
+                <!-- File Upload Section -->
+                <div class="file-upload-section">
+                    <div class="upload-window">
+                        <div class="upload-window-header">
+                            <span>File Selection</span>
+                            <button class="window-close-btn">×</button>
+                        </div>
+                        <div class="upload-content">
+                            <div class="file-input-row">
+                                <input type="file" id="masterDataFile" accept=".xlsx,.xls,.csv" class="file-input">
+                                <button id="uploadBtn" class="upload-btn">Upload</button>
+                                <button id="goToTestingBtn" class="testing-btn" disabled>Go To Testing Window</button>
+                            </div>
+                            <div class="upload-info">
+                                <p>This data need to be upload in software through uploading below Excel format data into software</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Master Data Table -->
+                <div class="master-data-section">
+                    <div class="master-data-header">
+                        <h3>MASTER DATA</h3>
+                    </div>
+                    <div class="master-data-table-container">
+                        <table class="master-data-table" id="masterDataTable">
+                            <thead>
+                                <tr class="table-main-header">
+                                    <th rowspan="2" class="header-cell">Sr. No.</th>
+                                    <th rowspan="2" class="header-cell">Model</th>
+                                    <th rowspan="2" class="header-cell">Phase</th>
+                                    <th colspan="3" class="header-cell section-header">Megger Test</th>
+                                    <th colspan="10" class="header-cell section-header">No Load Test</th>
+                                    <th rowspan="2" class="header-cell">Direction</th>
+                                </tr>
+                                <tr class="table-sub-header">
+                                    <th class="header-cell">Min. Insulation resistance (MΩ)</th>
+                                    <th class="header-cell">Max. Insulation resistance (MΩ)</th>
+                                    <th class="header-cell">Test Time (Second)</th>
+                                    <th class="header-cell">Min. Voltage (Volt)</th>
+                                    <th class="header-cell">Max. Voltage (Volt)</th>
+                                    <th class="header-cell">Min. Current (amp.)</th>
+                                    <th class="header-cell">Max. Current (amp.)</th>
+                                    <th class="header-cell">Min. Power (Watt)</th>
+                                    <th class="header-cell">Max. Power (Watt)</th>
+                                    <th class="header-cell">Min. Frequency (Hz)</th>
+                                    <th class="header-cell">Max. Frequency (Hz)</th>
+                                    <th class="header-cell">Min. RPM</th>
+                                    <th class="header-cell">Max. RPM</th>
+                                </tr>
+                            </thead>
+                            <tbody id="masterDataTableBody">
+                                <!-- Sample rows for demonstration -->
+                                <tr>
+                                    <td>1</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>14</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>15</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr>
+                                    <td>16</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Import Actions -->
+                <div class="import-actions">
+                    <button id="loadSampleDataBtn" class="import-btn import-btn-info">Load Sample Data</button>
+                    <button id="validateDataBtn" class="import-btn import-btn-warning" disabled>Validate Data</button>
+                    <button id="runBatchTestBtn" class="import-btn import-btn-success" disabled>Run Batch Tests</button>
+                    <button id="exportTemplateBtn" class="import-btn import-btn-secondary">Download Template</button>
+                    <button id="clearImportBtn" class="import-btn import-btn-danger">Clear Data</button>
+                </div>
+
+                <!-- Import Status -->
+                <div class="import-status" id="importStatus">
+                    <p>No data imported. Upload an Excel file or load sample data to begin testing.</p>
+                </div>
+
+                <!-- Batch Test Progress -->
+                <div class="batch-progress-section" id="batchProgressSection" style="display: none;">
+                    <h4>Batch Test Progress</h4>
+                    <div class="progress-container">
+                        <div class="progress-bar-batch">
+                            <div class="progress-fill-batch" id="batchProgressFill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="batchProgressText">0 / 0 tests completed</span>
+                        </div>
+                    </div>
+                    <div class="batch-results" id="batchResults">
+                        <!-- Batch test results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing Tab -->
+        <div id="testingTab" class="tab-content active">
+            <!-- Header Section -->
+            <div class="dashboard-header">
+                <div class="logo-section">
+                    <div class="logo-placeholder">
+                        <span class="logo-text">SILVER</span>
+                        <span class="logo-subtext">SMART TESTING SOLUTIONS</span>
+                    </div>
+                </div>
+                <div class="title-section">
+                    <h1>INSULATION RESISTANCE AND NO LOAD TEST SETUP SOFTWARE</h1>
+                </div>
+                <div class="header-controls">
+                    <button class="header-btn close-btn">X</button>
+                    <button class="header-btn minimize-btn">-</button>
+                    <button class="header-btn generate-btn">Generate reports</button>
+                </div>
+            </div>
+
+            <!-- Status Indicators -->
+            <div class="status-indicators-section">
+                <div class="status-compact-row">
+                    <div class="status-compact-item">
+                        <span class="status-compact-text">MEGGER</span>
+                        <div class="status-compact-circle" id="meggerStatusCircle">
+                            <div class="status-compact-dot"></div>
+                        </div>
+                    </div>
+                    <div class="status-compact-item">
+                        <span class="status-compact-text">START BTN</span>
+                        <div class="status-compact-circle" id="startButtonStatusCircle">
+                            <div class="status-compact-dot"></div>
+                        </div>
+                    </div>
+                    <div class="status-compact-item">
+                        <span class="status-compact-text">EMERGENCY IR</span>
+                        <div class="status-compact-circle" id="emergencyStatusCircle">
+                            <div class="status-compact-dot"></div>
+                        </div>
+                    </div>
+                    <div class="status-compact-item">
+                        <span class="status-compact-text">VFD COMM</span>
+                        <div class="status-compact-circle" id="vfdStatusCircle">
+                            <div class="status-compact-dot"></div>
+                        </div>
+                    </div>
+                    <div class="status-compact-item">
+                        <span class="status-compact-text">VFD EMRG</span>
+                        <div class="status-compact-circle" id="vfdEmergencyStatusCircle">
+                            <div class="status-compact-dot"></div>
+                        </div>
+                    </div>
+                    <div class="demo-controls-compact">
+                        <button class="demo-btn-small" onclick="runDemoTest('pass')" title="Demo PASS Test">PASS</button>
+                        <button class="demo-btn-small" onclick="runDemoTest('fail')" title="Demo FAIL Test">FAIL</button>
+                        <button class="demo-btn-small" onclick="toggleStatusDemo()" title="Toggle Status">STATUS</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Selection -->
+            <div class="model-section">
+                <div class="model-row">
+                    <span class="model-label">MODEL</span>
+                    <select id="modelSelect" class="model-dropdown">
+                        <option value="">Select Model</option>
+                        <option value="PMSM-1500">PMSM-1500</option>
+                        <option value="PMSM-3000">PMSM-3000</option>
+                        <option value="PMSM-5500">PMSM-5500</option>
+                    </select>
+                    <span class="serial-label">Sr. No</span>
+                    <input type="text" id="serialInput" class="serial-input" placeholder="Enter Serial Number">
+                    <button id="editBtn" class="edit-btn">EDIT</button>
+                </div>
+            </div>
+
+            <!-- Real Time Data Section -->
+            <div class="realtime-section">
+                <div class="section-header">Real Time Data</div>
+                <div class="realtime-grid">
+                    <div class="data-box">
+                        <div class="data-label">Insulation resistance (MΩ)</div>
+                        <div class="data-value" id="insulationDisplay">---</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-label">Voltage (Volt)</div>
+                        <div class="data-value" id="voltageDisplay">---</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-label">Current (amp)</div>
+                        <div class="data-value" id="currentDisplay">---</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-label">Power (Watt)</div>
+                        <div class="data-value" id="powerDisplay">---</div>
+                    </div>
+                    <div class="data-box">
+                        <div class="data-label">Frequency (Hz)</div>
+                        <div class="data-value" id="frequencyDisplay">---</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Limits and Results Section -->
+            <div class="test-limits-section">
+                <div class="limits-grid">
+                    <!-- Left Column - IR Test Limits -->
+                    <div class="limits-column">
+                        <div class="limit-header">Insulation resistance Test Limit</div>
+                        <div class="limit-row">
+                            <span class="limit-label">Min. Insulation resistance (MΩ)</span>
+                            <input type="number" id="minIRLimit" class="limit-input" value="100">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Max. Insulation resistance (MΩ)</span>
+                            <input type="number" id="maxIRLimit" class="limit-input" value="1000">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Test Time Time (sec)</span>
+                            <input type="number" id="testTimeLimit" class="limit-input" value="5">
+                        </div>
+                    </div>
+
+                    <!-- Middle Columns - IR Test Results -->
+                    <div class="results-column">
+                        <div class="result-header">Before No load Test<br>Measured MΩ</div>
+                        <div class="result-box" id="beforeIRResult">
+                            <div class="result-value">---</div>
+                            <div class="result-status">---</div>
+                        </div>
+                    </div>
+                    <div class="results-column">
+                        <div class="result-header">After No load Test<br>Measured MΩ</div>
+                        <div class="result-box" id="afterIRResult">
+                            <div class="result-value">---</div>
+                            <div class="result-status">---</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Columns - No Load Test Limits and Results -->
+                    <div class="limits-column">
+                        <div class="limit-header">No Load Test Limit</div>
+                        <div class="limit-row">
+                            <span class="limit-label">Min. Rated Voltage (Volt)</span>
+                            <input type="number" id="minVoltageLimit" class="limit-input" value="200">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Max. Rated Voltage (Volt)</span>
+                            <input type="number" id="maxVoltageLimit" class="limit-input" value="240">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Min. Current (amp)</span>
+                            <input type="number" id="minCurrentLimit" class="limit-input" value="0">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Max. Current (amp)</span>
+                            <input type="number" id="maxCurrentLimit" class="limit-input" value="8">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Min. Power (Watt)</span>
+                            <input type="number" id="minPowerLimit" class="limit-input" value="0">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Max. Power (Watt)</span>
+                            <input type="number" id="maxPowerLimit" class="limit-input" value="2000">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Min. Frequency (Hz)</span>
+                            <input type="number" id="minFreqLimit" class="limit-input" value="49">
+                        </div>
+                        <div class="limit-row">
+                            <span class="limit-label">Max. Frequency (Hz)</span>
+                            <input type="number" id="maxFreqLimit" class="limit-input" value="51">
+                        </div>
+                    </div>
+
+                    <!-- Final Results Column -->
+                    <div class="final-results-column">
+                        <div class="result-header">Measured value</div>
+                        <div class="final-result-grid">
+                            <div class="final-result-item">
+                                <span class="final-result-label">Min. Rated Voltage (Volt)</span>
+                                <div class="final-result-box" id="finalVoltageResult">
+                                    <span class="final-result-value">---</span>
+                                    <span class="final-result-status">---</span>
+                                </div>
+                            </div>
+                            <div class="final-result-item">
+                                <span class="final-result-label">Min. Current (amp)</span>
+                                <div class="final-result-box" id="finalCurrentResult">
+                                    <span class="final-result-value">---</span>
+                                    <span class="final-result-status">---</span>
+                                </div>
+                            </div>
+                            <div class="final-result-item">
+                                <span class="final-result-label">Min. Power (Watt)</span>
+                                <div class="final-result-box" id="finalPowerResult">
+                                    <span class="final-result-value">---</span>
+                                    <span class="final-result-status">---</span>
+                                </div>
+                            </div>
+                            <div class="final-result-item">
+                                <span class="final-result-label">Min. Frequency (Hz)</span>
+                                <div class="final-result-box" id="finalFreqResult">
+                                    <span class="final-result-value">---</span>
+                                    <span class="final-result-status">---</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="overall-result">
+                            <div class="overall-result-header">Final Result</div>
+                            <div class="overall-result-box" id="overallResult">---</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results Table -->
+            <div class="test-table-section">
+                <table class="test-results-table">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Sr No</th>
+                            <th>Before Insulation resistance (MΩ)</th>
+                            <th>Results</th>
+                            <th>Voltage (Volt)</th>
+                            <th>Current (amp.)</th>
+                            <th>Power (Watt)</th>
+                            <th>Frequency (Hz)</th>
+                            <th>Results</th>
+                            <th>After Insulation resistance (MΩ)</th>
+                            <th>Results</th>
+                            <th>Final Results</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testResultsTableBody">
+                        <!-- Test results will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="statistics-section">
+                <div class="stats-grid">
+                    <div class="stats-item">
+                        <span class="stats-label">Total Production Qty</span>
+                        <span class="stats-value" id="totalProduction">0</span>
+                    </div>
+                    <div class="stats-section-header">BEFORE NO LOAD I.R. TEST</div>
+                    <div class="stats-section-header">NO LOAD</div>
+                    <div class="stats-section-header">AFTER NO LOAD I.R. TEST</div>
+                </div>
+                <div class="stats-details">
+                    <div class="stats-column">
+                        <div class="stats-row">
+                            <span class="stats-label">Pass Qty</span>
+                            <span class="stats-value" id="beforePassQty">0</span>
+                            <span class="stats-percent" id="beforePassPercent">0%</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Fail Qty</span>
+                            <span class="stats-value" id="beforeFailQty">0</span>
+                            <span class="stats-percent" id="beforeFailPercent">0%</span>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="stats-row">
+                            <span class="stats-label">Fail Qty</span>
+                            <span class="stats-value" id="noLoadFailQty">0</span>
+                            <span class="stats-percent" id="noLoadFailPercent">0%</span>
+                        </div>
+                    </div>
+                    <div class="stats-column">
+                        <div class="stats-row">
+                            <span class="stats-label">Pass Qty</span>
+                            <span class="stats-value" id="afterPassQty">0</span>
+                            <span class="stats-percent" id="afterPassPercent">0%</span>
+                        </div>
+                        <div class="stats-row">
+                            <span class="stats-label">Fail Qty</span>
+                            <span class="stats-value" id="afterFailQty">0</span>
+                            <span class="stats-percent" id="afterFailPercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="date-time-section">
+                    <span class="date-label">Date</span>
+                    <span class="date-value" id="currentDate">17-07-2024</span>
+                    <span class="time-label">Time</span>
+                    <span class="time-value" id="currentTimeDisplay">11:47:00</span>
+                </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button id="startTestBtn" class="control-btn start-btn" disabled>START TEST</button>
+                <button id="stopTestBtn" class="control-btn stop-btn">STOP TEST</button>
+                <button id="resetBtn" class="control-btn reset-btn">RESET</button>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reportsTab" class="tab-content">
+            <div class="report-container">
+                <!-- Report Header -->
+                <div class="report-excel-header">
+                    <div class="report-logo-section">
+                        <div class="report-logo">
+                            <span class="report-logo-text">SILVER</span>
+                            <span class="report-logo-subtext">SMART TESTING SOLUTIONS</span>
+                        </div>
+                    </div>
+                    <div class="report-title-section">
+                        <h2>Silver Consumer Electricals Limited</h2>
+                        <h3>Insulation Resistance & No load Routine Test Reports</h3>
+                    </div>
+                    <div class="report-info-section">
+                        <div class="report-info-item">
+                            <span>Doc No.</span>
+                            <span id="reportDocNo">IR-NL-001</span>
+                        </div>
+                        <div class="report-info-item">
+                            <span>Rev.</span>
+                            <span id="reportRev">01</span>
+                        </div>
+                        <div class="report-info-item">
+                            <span>DATE</span>
+                            <span id="reportDate">---</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Information -->
+                <div class="report-model-section">
+                    <div class="report-model-info">
+                        <div class="model-field">
+                            <span class="field-label">Model</span>
+                            <span class="field-value" id="reportModelValue">---</span>
+                        </div>
+                        <div class="model-field">
+                            <span class="field-label">Phase: 1 or 3</span>
+                            <span class="field-value" id="reportPhaseValue">---</span>
+                        </div>
+                        <div class="model-field">
+                            <span class="field-label">Direction: CW or CCW</span>
+                            <span class="field-value" id="reportDirectionValue">---</span>
+                        </div>
+                    </div>
+                    <div class="report-test-limits">
+                        <div class="limits-section">
+                            <span class="limits-title">IR Test Time (sec)</span>
+                            <span class="limits-value" id="reportIRTime">5</span>
+                        </div>
+                        <div class="limits-grid">
+                            <div class="limits-column">
+                                <div class="limits-header">Before No load Test</div>
+                                <div class="limits-item">
+                                    <span>Min. Insulation resistance (MΩ)</span>
+                                    <span id="reportMinIR">100</span>
+                                </div>
+                            </div>
+                            <div class="limits-column">
+                                <div class="limits-header">No Load Test</div>
+                                <div class="limits-item">
+                                    <span>Min. Voltage (Volt)</span>
+                                    <span id="reportMinVolt">200</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Max. Voltage (Volt)</span>
+                                    <span id="reportMaxVolt">240</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Min. Current (Amp)</span>
+                                    <span id="reportMinCurr">0</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Max. Current (Amp)</span>
+                                    <span id="reportMaxCurr">8</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Min. Power (Watt)</span>
+                                    <span id="reportMinPower">0</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Max. Power (Watt)</span>
+                                    <span id="reportMaxPower">2000</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Min. Frequency (Hz)</span>
+                                    <span id="reportMinFreq">49</span>
+                                </div>
+                                <div class="limits-item">
+                                    <span>Max. Frequency (Hz)</span>
+                                    <span id="reportMaxFreq">51</span>
+                                </div>
+                            </div>
+                            <div class="limits-column">
+                                <div class="limits-header">After No load Test</div>
+                                <div class="limits-item">
+                                    <span>Min. Insulation resistance (MΩ)</span>
+                                    <span id="reportMinIRAfter">100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Results Table -->
+                <div class="report-table-section">
+                    <table class="report-excel-table" id="reportExcelTable">
+                        <thead>
+                            <tr class="table-header-row">
+                                <th rowspan="3" class="header-cell">Sr No</th>
+                                <th rowspan="3" class="header-cell">Date</th>
+                                <th rowspan="3" class="header-cell">Time</th>
+                                <th rowspan="3" class="header-cell">Sr No</th>
+                                <th rowspan="3" class="header-cell">Final Result</th>
+                                <th colspan="3" class="header-cell section-header">Megger Test</th>
+                                <th colspan="5" class="header-cell section-header">No Load Test</th>
+                                <th colspan="3" class="header-cell section-header">Megger Test</th>
+                            </tr>
+                            <tr class="table-subheader-row">
+                                <th colspan="2" class="header-cell">Insulation resistance Test (MΩ) Before No load Test</th>
+                                <th rowspan="2" class="header-cell">Result</th>
+                                <th rowspan="2" class="header-cell">Volt</th>
+                                <th rowspan="2" class="header-cell">Amp</th>
+                                <th rowspan="2" class="header-cell">Power</th>
+                                <th rowspan="2" class="header-cell">Frequency</th>
+                                <th rowspan="2" class="header-cell">RPM</th>
+                                <th rowspan="2" class="header-cell">Direction</th>
+                                <th colspan="2" class="header-cell">Insulation resistance Test (MΩ) After No load Test</th>
+                            </tr>
+                            <tr class="table-subheader-row">
+                                <th class="header-cell">Min. Insulation resistance (MΩ)</th>
+                                <th class="header-cell">Result</th>
+                                <th class="header-cell">Result</th>
+                                <th class="header-cell">Min. Insulation resistance (MΩ)</th>
+                                <th class="header-cell">Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportExcelTableBody">
+                            <!-- Report data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Report Actions -->
+                <div class="report-actions">
+                    <button id="generateReportBtn" class="report-btn report-btn-primary">Generate Report</button>
+                    <button id="saveReportBtn" class="report-btn report-btn-success" disabled>Save as Excel</button>
+                    <button id="printReportBtn" class="report-btn report-btn-info" disabled>Print Report</button>
+                    <button id="exportPdfBtn" class="report-btn report-btn-warning" disabled>Export PDF</button>
+                    <button id="clearReportBtn" class="report-btn report-btn-danger">Clear Report</button>
+                </div>
+
+                <!-- Report Status -->
+                <div class="report-status" id="reportStatus">
+                    <p>No report generated yet. Complete tests and click "Generate Report" to create the report.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab (Supervisor Only) -->
+        <div id="settingsTab" class="tab-content">
+            <div class="settings-container">
+                <div class="settings-section">
+                    <h3>IR Test Settings (Configurable)</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="irTestTime">IR Test Time (Seconds)</label>
+                            <input type="number" id="irTestTime" value="5" min="1" max="30" step="1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="minInsulationResistance">Minimum Insulation Resistance (MΩ)</label>
+                            <input type="number" id="minInsulationResistance" value="100" min="1" step="1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="maxInsulationResistance">Maximum Insulation Resistance (MΩ)</label>
+                            <input type="number" id="maxInsulationResistance" value="1000" min="100" step="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>No Load Test Limits</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="voltageMinLimit">Voltage Min (V)</label>
+                            <input type="number" id="voltageMinLimit" value="200" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="voltageMaxLimit">Voltage Max (V)</label>
+                            <input type="number" id="voltageMaxLimit" value="240" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="currentMaxLimit">Current Max (A)</label>
+                            <input type="number" id="currentMaxLimit" value="8" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="powerMaxLimit">Power Max (W)</label>
+                            <input type="number" id="powerMaxLimit" value="2000" step="10">
+                        </div>
+                        <div class="setting-item">
+                            <label for="frequencyMinLimit">Frequency Min (Hz)</label>
+                            <input type="number" id="frequencyMinLimit" value="49" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="frequencyMaxLimit">Frequency Max (Hz)</label>
+                            <input type="number" id="frequencyMaxLimit" value="51" step="0.1">
+                        </div>
+                        <div class="setting-item">
+                            <label for="speedMinLimit">Speed Min (RPM)</label>
+                            <input type="number" id="speedMinLimit" value="1400" step="10">
+                        </div>
+                        <div class="setting-item">
+                            <label for="speedMaxLimit">Speed Max (RPM)</label>
+                            <input type="number" id="speedMaxLimit" value="1600" step="10">
+                        </div>
+                    </div>
+                    <button id="saveSettingsBtn" class="btn btn-primary">Save Test Settings</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Change Password</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" placeholder="Enter current password">
+                        </div>
+                        <div class="setting-item">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password">
+                        </div>
+                        <div class="setting-item">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                        </div>
+                    </div>
+                    <button id="changePasswordBtn" class="btn btn-primary">Change Password</button>
+                    <div id="passwordChangeStatus" class="password-status"></div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>User Management</h3>
+                    <div class="user-list">
+                        <div class="user-item">
+                            <span>operator1 (Operator)</span>
+                            <button class="btn btn-small btn-danger">Remove</button>
+                        </div>
+                        <div class="user-item">
+                            <span>operator2 (Operator)</span>
+                            <button class="btn btn-small btn-danger">Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">Add User</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Tab (Supervisor Only) -->
+        <div id="historyTab" class="tab-content">
+            <div class="card">
+                <h3>Test History</h3>
+                <div class="table-container">
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Serial Number</th>
+                                <th>Model</th>
+                                <th>Result</th>
+                                <th>Voltage</th>
+                                <th>Current</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="web-main.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

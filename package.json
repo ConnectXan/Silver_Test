@@ -1,0 +1,23 @@
+{
+  "name": "pmsm-motor-testing-demo",
+  "version": "1.0.0",
+  "description": "Automated PMSM Motor Testing System Demo",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "web": "node web-server.js",
+    "build": "electron-builder"
+  },
+  "keywords": ["motor", "testing", "automation", "demo"],
+  "author": "Motor Testing Systems",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "jspdf": "^2.5.1"
+  }
+}
